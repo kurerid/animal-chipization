@@ -43,6 +43,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		//Удаление животного
 		animals.DELETE("/:animalId")
 
+		//Добавление типа конкретному животному
+		animals.POST(":animalId/types/:typeId")
 		//Изменить тип у конкретного животного
 		animals.PUT("/:animalId/types")
 		//Удаление типа у конкретного животного
