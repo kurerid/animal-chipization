@@ -11,15 +11,13 @@ import (
 	"os"
 )
 
-const portPath = "configs/config.local.json"
-
 func main() {
-	config, err := loadConfig(portPath)
-	if err != nil {
-		log.Fatal(err)
-	}
 	if err := godotenv.Load(); err != nil {
 		log.Fatalf("failed to read environments: %s", err.Error())
+	}
+	config, err := loadConfig(os.Getenv("CONFIG_PATH"))
+	if err != nil {
+		log.Fatal(err)
 	}
 	db, err := repository.NewPostgresDB(repository.Config{
 		DBConfig: repository.DBConfig{
