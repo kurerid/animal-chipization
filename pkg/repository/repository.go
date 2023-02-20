@@ -19,9 +19,9 @@ type User interface {
 
 type Animal interface {
 	GetById(id int64) (*models.Animal, error)
-	Search(input *models.AnimalSearchInput) (*Animal, error)
-	New(input *models.AnimalNewInput) (*Animal, error)
-	Update(input *models.AnimalUpdateInput) (*Animal, error)
+	Search(input *models.AnimalSearchInput) (*models.Animal, error)
+	New(input *models.AnimalNewInput) (*models.Animal, error)
+	Update(input *models.AnimalUpdateInput) (*models.Animal, error)
 	Remove(id int64) error
 	AddType(animal int64, typeId int64) error
 	ChangeType(animal int64, oldType int64, newType int64) error
