@@ -7,10 +7,11 @@ import (
 
 type Authorization interface {
 	SignUp(input *models.SignUpInput) (*models.SignUpOutput, error)
-	SignIn()
+	SignIn(email string, password string) error
 }
 
-type User interface {
+type Account interface {
+	Exist(email string) (bool, error)
 	GetById(id int) (*models.AccountGetByIdOutput, error)
 	Search(input *models.AccountSearchInput) (*models.AccountSearchOutput, error)
 	Update(input *models.AccountUpdateInput) (*models.AccountUpdateOutput, error)
@@ -29,7 +30,7 @@ type Animal interface {
 	Locations(input *models.AnimalVisitedLocationListInput) (*models.AnimalVisitedLocation, error)
 	AddLocation(animal int64, location int64) error
 	ChangeLocation(animal int64, visitedLocation int64, location int64) error
-	RemoveLocation(animal int64, visitedLocation int64)
+	RemoveLocation(animal int64, visitedLocation int64) error
 }
 
 type Type interface {
@@ -43,21 +44,22 @@ type Location interface {
 	GetById(id int64) (*models.Location, error)
 	New(latitude float32, longitude float32) error
 	Modify(id int64, latitude float32, longitude float32) error
-	Remove(id int64)
+	Remove(id int64) error
 }
 
 type Repository struct {
 	Authorization
 	Animal
-	User
+	Account
+	Type
 	Location
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		Authorization: nil,
+		Authorization: NewAuthPostgres(db),
 		Animal:        nil,
-		User:          nil,
+		Account:       nil,
 		Location:      nil,
 	}
 }
