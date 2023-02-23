@@ -7,17 +7,18 @@ import (
 	"encoding/json"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-	"log"
+	"github.com/sirupsen/logrus"
 	"os"
 )
 
 func main() {
+	logrus.SetFormatter(new(logrus.JSONFormatter))
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("failed to read environments: %s", err.Error())
+		logrus.Fatalf("failed to read environments: %s", err.Error())
 	}
 	config, err := loadConfig(os.Getenv("CONFIG_PATH"))
 	if err != nil {
-		log.Fatal(err)
+		logrus.Fatal(err)
 	}
 	db, err := repository.NewPostgresDB(repository.Config{
 		DBConfig: repository.DBConfig{
@@ -30,27 +31,27 @@ func main() {
 		},
 	})
 	if err != nil {
-		log.Fatalf("failed to initialize db: %s", err.Error())
+		logrus.Fatalf("failed to initialize db: %s", err.Error())
 	}
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
 	if err := run(config, handlers); err != nil {
-		log.Fatal(err)
+		logrus.Fatal(err)
 	}
 }
 
 func loadConfig(path string) (*repository.Config, error) {
 	bytes, err := os.ReadFile(path)
 	if err != nil {
-		log.Println(err)
+		logrus.Println(err)
 		return nil, err
 	}
 	var config repository.Config
 	err = json.Unmarshal(bytes, &config)
 	if err != nil {
-		log.Println(err)
+		logrus.Println(err)
 		return nil, err
 	}
 	return &config, err

@@ -12,10 +12,10 @@ type Authorization interface {
 
 type Account interface {
 	Exist(email string) (bool, error)
-	GetById(id int) (*models.AccountGetByIdOutput, error)
-	Search(input *models.AccountSearchInput) (*models.AccountSearchOutput, error)
-	Update(input *models.AccountUpdateInput) (*models.AccountUpdateOutput, error)
-	Remove(id int) error
+	//GetById(id int) (*models.AccountGetByIdOutput, error)
+	//Search(input *models.AccountSearchInput) (*models.AccountSearchOutput, error)
+	//Update(input *models.AccountUpdateInput) (*models.AccountUpdateOutput, error)
+	//Remove(id int) error
 }
 
 type Animal interface {

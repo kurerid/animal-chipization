@@ -28,7 +28,7 @@ func (h *Handler) signUp(c *gin.Context) {
 		h.sendResponse(c, 500, err)
 		return
 	}
-	h.sendResponse(c, 201, &output)
+	c.JSON(201, &output)
 }
 
 func (h *Handler) signIn(c *gin.Context) {
