@@ -17,6 +17,6 @@ func (s *AuthorizationService) SignUp(input *models.SignUpInput) (*models.SignUp
 	return s.repo.SignUp(input)
 }
 
-func (s *AuthorizationService) SignIn(email string, password string) error {
+func (s *AuthorizationService) SignIn(email string, password string) (bool, error) {
 	return s.repo.SignIn(email, password)
 }

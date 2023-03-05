@@ -25,6 +25,14 @@ func (r *AuthPostgres) SignUp(input *models.SignUpInput) (*models.SignUpOutput, 
 	return &output, nil
 }
 
-func (r *AuthPostgres) SignIn(email string, password string) error {
-	return nil
+func (r *AuthPostgres) SignIn(email string, password string) (bool, error) {
+	rows, err := r.db.Query(`SELECT "Email", "Password" FROM "Account" WHERE "Email"=$1 AND "Password" = $2`, email, password)
+	if err != nil {
+		logrus.Error(err)
+		return false, err
+	}
+	if !rows.Next() {
+		return false, nil
+	}
+	return true, nil
 }

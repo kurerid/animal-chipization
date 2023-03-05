@@ -27,10 +27,10 @@ type AccountGetByIdInput struct {
 }
 
 type AccountGetByIdOutput struct {
-	Id        int    `json:"id"`
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	Email     string `json:"email"`
+	Id        int    `json:"id" db:"Id"`
+	FirstName string `json:"firstName" db:"FirstName"`
+	LastName  string `json:"lastName" db:"LastName"`
+	Email     string `json:"email" db:"Email"`
 }
 
 type AccountSearchInput struct {

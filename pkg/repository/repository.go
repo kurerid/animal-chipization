@@ -7,15 +7,15 @@ import (
 
 type Authorization interface {
 	SignUp(input *models.SignUpInput) (*models.SignUpOutput, error)
-	SignIn(email string, password string) error
+	SignIn(email string, password string) (bool, error)
 }
 
 type Account interface {
 	Exist(email string) (bool, error)
-	//GetById(id int) (*models.AccountGetByIdOutput, error)
-	//Search(input *models.AccountSearchInput) (*models.AccountSearchOutput, error)
-	//Update(input *models.AccountUpdateInput) (*models.AccountUpdateOutput, error)
-	//Remove(id int) error
+	GetById(id int) (*models.AccountGetByIdOutput, error)
+	Search(input *models.AccountSearchInput) (*models.AccountSearchOutput, error)
+	Update(input *models.AccountUpdateInput) (*models.AccountUpdateOutput, error)
+	Remove(id int) error
 }
 
 type Animal interface {
