@@ -37,7 +37,7 @@ type Type interface {
 	GetById(id int64) (*models.AnimalType, error)
 	New(name string) error
 	Modify(id int64, name string) error
-	Remove(id int) error
+	Remove(id int64) error
 }
 
 type Location interface {

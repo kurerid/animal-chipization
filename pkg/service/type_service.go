@@ -25,6 +25,6 @@ func (s *TypeService) Modify(id int64, name string) error {
 	return s.repo.Modify(id, name)
 }
 
-func (s *TypeService) Remove(id int) error {
+func (s *TypeService) Remove(id int64) error {
 	return s.repo.Remove(id)
 }
