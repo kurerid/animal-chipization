@@ -59,7 +59,7 @@ func (h *Handler) modifyAnimalType(c *gin.Context) {
 
 func (h *Handler) removeAnimalType(c *gin.Context) {
 	var input models.AnimalTypeRemoveInput
-	if err := c.ShouldBindUri(&input); err != {
+	if err := c.ShouldBindUri(&input); err != nil {
 		h.sendResponse(c, 400, err)
 		return
 	}
