@@ -55,3 +55,11 @@ func (r *AccountPostgres) Search(input *models.AccountSearchInput) (*models.Acco
 	}
 	return &output, nil
 }
+
+func (r *AccountPostgres) Update(input *models.AccountUpdateInput) (*models.AccountUpdateOutput, error) {
+	return nil, nil
+}
+
+func (r *AccountPostgres) Remove(id int) error {
+	return nil
+}

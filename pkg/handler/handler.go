@@ -21,7 +21,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	accounts := router.Group("/accounts")
 	{
 		//Получение информации об аккаунте пользователя
-		accounts.GET("/:id", h.accountGetById)
+		accounts.GET("/:accountId", h.accountGetById)
 		//Поиск аккаунтов пользователей по параметрам
 		accounts.GET("/search", h.searchAccount)
 		//Обновление данных аккаунта пользователя

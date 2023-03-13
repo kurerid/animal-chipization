@@ -2,11 +2,13 @@ package handler
 
 import (
 	"animal-chipization/models"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"strconv"
 )
 
 func (h *Handler) signUp(c *gin.Context) {
-	if !CheckAuthorization(c) {
+	if CheckAuthorization(c) {
 		h.sendResponse(c, 403, "Already authorised user")
 		return
 	}
@@ -35,8 +37,11 @@ func (h *Handler) signUp(c *gin.Context) {
 
 func (h *Handler) accountGetById(c *gin.Context) {
 	var input models.AccountGetByIdInput
+	var err error
 
-	if err := c.ShouldBindUri(&input); err != nil {
+	input.Id, err = strconv.Atoi(c.Param("accountId"))
+	if err != nil {
+		fmt.Println(err)
 		h.sendResponse(c, 400, err)
 		return
 	}
